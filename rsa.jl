@@ -32,4 +32,6 @@ end
 D = invmod(E, ϕ)
 # criptografar
 
+msgCript = [(BigInt(letra)^E % N) for letra in msg]
 # descriptografar
+join(map(x -> Char(x^D % N), msgCript))
