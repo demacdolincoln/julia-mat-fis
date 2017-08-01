@@ -2,7 +2,7 @@
 using Primes
 
 # gerar p e q
- p, q = rand(Primes.PRIMES[20:50],2)
+p, q = rand(Primes.PRIMES[20:50],2)
 # calcular N
 N = p * q
 # calcular ϕ
@@ -25,13 +25,26 @@ E = begin
         end
         cont += 1
     end
-    return coprime
+    coprime
 end
 
 # calcular D
 D = invmod(E, ϕ)
 # criptografar
+println("################################")
+println("""p, q = $p, $q
+N = $N
+ϕ = $ϕ
+E = $E
+D = $D
+""")
+println("################################")
+
+println("digite uma mensagem abaixo:")
+msg = readline()
 
 msgCript = [(BigInt(letra)^E % N) for letra in msg]
+println(msgCript)
 # descriptografar
-join(map(x -> Char(x^D % N), msgCript))
+msgDec = join(map(x -> Char(x^D % N), msgCript))
+println(msgDec)
